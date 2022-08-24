@@ -1,0 +1,22 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install g++-aarch64-linux-gnu clang-format-14 -y
+
+    - name: Check Format
+      run: make format-check BOOT_MNT=dummy ROOTFS_MNT=dummy
+
+    - name: Compile (GCC)
+      run: make VERBOSE=1 DEBUG=1 -j$(nproc) BOOT_MNT=dummy ROOTFS_MNT=dummy
