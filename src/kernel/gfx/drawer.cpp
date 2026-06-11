@@ -45,7 +45,15 @@ void Drawer::drawTex(void* tex, size_t x, size_t y, size_t w, size_t h)
 
     for (size_t yOff = 0; yOff < h && y + yOff < m_fb->height(); yOff++)
         for (size_t xOff = 0; xOff < w && x + xOff < m_fb->width(); xOff++)
-            *m_fb->data(x + xOff, y + yOff) = col[yOff * w + xOff];
+        {
+        u8* p = reinterpret_cast<u8*>(tex);
+        auto& dst = *m_fb->data(x + xOff, y + yOff);
+
+        dst.r = p[(yOff * w + xOff) * 4 + 0];
+        dst.g = p[(yOff * w + xOff) * 4 + 1];
+        dst.b = p[(yOff * w + xOff) * 4 + 2];
+        dst.a = p[(yOff * w + xOff) * 4 + 3];
+        }
 }
 
 }
