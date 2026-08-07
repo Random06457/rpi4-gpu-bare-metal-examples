@@ -443,7 +443,7 @@ void rainbowTriangleGL(Kernel& kern)
                 indirect << StoreTileBufferGeneral(
                     BUFFER_RENDER_TARGET_0, V3D_TILING_RASTER, false,
                     V3D_DITHER_MODE_NONE, V3D_DECIMATE_MODE_SAMPLE_0,
-                    V3D_OUTPUT_IMAGE_FORMAT_RGBA8, false, false, true,
+                    V3D_OUTPUT_IMAGE_FORMAT_RGBA8, false, false, false,
                     width * 4, 0, render_target.paddr());
 
                 indirect << StoreTileBufferGeneral(
